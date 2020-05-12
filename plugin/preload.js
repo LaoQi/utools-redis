@@ -42,10 +42,14 @@ window.exports = {
             },
             // 用户选择列表中某个条目时被调用
             select: (action, itemData, callbackSetList) => {
-                window.utools.hideMainWindow()
-                const url = itemData.url
-                require('electron').shell.openExternal(url)
-                window.utools.outPlugin()
+                // window.utools.hideMainWindow()
+                // const url = itemData.url
+                // require('electron').shell.openExternal(url)
+                // window.utools.outPlugin()
+                utools.ubrowser.goto('https://cn.bing.com')
+                .value('#sb_form_q', 'uTools')
+                .click('#sb_form_go')
+                .run({ width: 1000, height: 600 })
             },
             // 子输入框为空时的占位符，默认为字符串"搜索"
             placeholder: "搜索"

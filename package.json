@@ -1,0 +1,27 @@
+{
+  "name": "utools-redis",
+  "version": "1.0.0",
+  "description": "* 连接列表\r * DB列表\r * Key列表\r *",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LaoQi/utools-redis.git"
+  },
+  "keywords": [
+    "utools",
+    "plugin",
+    "redis"
+  ],
+  "author": "LaoQi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LaoQi/utools-redis/issues"
+  },
+  "homepage": "https://github.com/LaoQi/utools-redis#readme",
+  "dependencies": {
+    "redis": "^3.0.2"
+  }
+}
