@@ -3,13 +3,20 @@
 	"description": "简单的redis管理软件",
 	"author": "阿菠萝",
 	"homepage": "https://github.com/LaoQi/utools-redis",
-	"main": "index.html",
+	"preload": "preload.js",
+	"logo": "redis-logo.png",
+	"pluginSetting": {
+		"single": false,
+		"height": 0
+	},
 	"version": "0.0.1",
 	"features": [
 		{
-		  "code": "redis",
-		  "explain": "redis latest",
-			"cmds":["redis"]
+			"code": "redis",
+			"explain": "redis latest",
+			"cmds": [
+				"redis"
+			]
 		}
 	]
 }
