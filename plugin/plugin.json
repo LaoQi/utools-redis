@@ -4,6 +4,7 @@
 	"author": "阿菠萝",
 	"homepage": "https://github.com/LaoQi/utools-redis",
 	"preload": "preload.js",
+	
 	"logo": "redis-logo.png",
 	"pluginSetting": {
 		"single": false,
@@ -13,9 +14,16 @@
 	"features": [
 		{
 			"code": "redis",
-			"explain": "redis latest",
+			"explain": "Redis管理",
 			"cmds": [
 				"redis"
+			]
+		},
+		{
+			"code": "redis-create-link",
+			"explain": "创建一个新的Redis连接",
+			"cmds": [
+				"redis-create-link"
 			]
 		}
 	]

@@ -1,9 +1,10 @@
 {
   "name": "utools-redis",
   "version": "1.0.0",
-  "description": "* 连接列表\r * DB列表\r * Key列表\r *",
+  "description": "",
   "main": "src/main.js",
   "scripts": {
+    "build": "node build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,5 +24,9 @@
   "homepage": "https://github.com/LaoQi/utools-redis#readme",
   "dependencies": {
     "redis": "^3.0.2"
+  },
+  "devDependencies": {
+    "rollup": "^2.10.0",
+    "rollup-plugin-commonjs": "^10.1.0"
   }
 }
