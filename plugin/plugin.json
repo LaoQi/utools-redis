@@ -3,6 +3,7 @@
 	"description": "简单的redis管理软件",
 	"author": "阿菠萝",
 	"homepage": "https://github.com/LaoQi/utools-redis",
+    "main": "index.html",
 	"preload": "preload.js",
 	
 	"logo": "redis-logo.png",
