@@ -23,10 +23,14 @@
   },
   "homepage": "https://github.com/LaoQi/utools-redis#readme",
   "dependencies": {
-    "redis": "^3.0.2"
+    "components": "^0.1.0",
+    "redis": "^3.0.2",
+    "vue": "^2.6.11"
   },
   "devDependencies": {
-    "rollup": "^2.10.0",
-    "rollup-plugin-commonjs": "^10.1.0"
+    "@vue/component-compiler-utils": "^3.1.2",
+    "parcel": "^1.12.4",
+    "parcel-bundler": "^1.12.4",
+    "vue-template-compiler": "^2.6.11"
   }
 }

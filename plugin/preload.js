@@ -1,3 +1,8 @@
+const redis = require('./external.js').redis
+// const redis = libs.redis
+// console.log(redis);
+window.redis = redis;
+
 utools.onPluginReady(() => {
     console.log('plugin ready!');
 })
@@ -12,5 +17,6 @@ utools.onPluginDetach(() => {
 
 utools.onPluginEnter(function (target) {
     console.log(target);
+    
     // utools.setExpendHeight(10);
 });

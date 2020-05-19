@@ -1,3 +1,5 @@
 node_modules
-plugin/lib
+.cache
 package-lock.json
+plugin/app.js
+plugin/external.js

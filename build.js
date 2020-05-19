@@ -1,68 +1,40 @@
-const rollup = require('rollup');
-import commonjs from 'rollup-plugin-commonjs';
+const Bundler = require('parcel-bundler');
+const Path = require('path');
 
-// see below for details on the options
-const inputOptions = {
-    input: 'node_modules/redis/index.js'
-};
-const outputOptions = {
-    file: 'plugin/lib/test.js',
-    format: 'cjs'
-};
-
-async function build() {
-    // create a bundle
-    const bundle = await rollup.rollup({
-        input : 'node_modules/redis/index.js',
-        plugins: [
-            commonjs()
-        ]
-    });
-
-    console.log(bundle.watchFiles); // an array of file names this bundle depends on
-
-    // generate output specific code in-memory
-    // you can call this function multiple times on the same bundle object
-    const { output } = await bundle.generate(outputOptions);
-
-    for (const chunkOrAsset of output) {
-        if (chunkOrAsset.type === 'asset') {
-            // For assets, this contains
-            // {
-            //   fileName: string,              // the asset file name
-            //   source: string | Uint8Array    // the asset source
-            //   type: 'asset'                  // signifies that this is an asset
-            // }
-            console.log('Asset', chunkOrAsset);
-        } else {
-            // For chunks, this contains
-            // {
-            //   code: string,                  // the generated JS code
-            //   dynamicImports: string[],      // external modules imported dynamically by the chunk
-            //   exports: string[],             // exported variable names
-            //   facadeModuleId: string | null, // the id of a module that this chunk corresponds to
-            //   fileName: string,              // the chunk file name
-            //   imports: string[],             // external modules imported statically by the chunk
-            //   isDynamicEntry: boolean,       // is this chunk a dynamic entry point
-            //   isEntry: boolean,              // is this chunk a static entry point
-            //   map: string | null,            // sourcemaps if present
-            //   modules: {                     // information about the modules in this chunk
-            //     [id: string]: {
-            //       renderedExports: string[]; // exported variable names that were included
-            //       removedExports: string[];  // exported variable names that were removed
-            //       renderedLength: number;    // the length of the remaining code in this module
-            //       originalLength: number;    // the original length of the code in this module
-            //     };
-            //   },
-            //   name: string                   // the name of this chunk as used in naming patterns
-            //   type: 'chunk',                 // signifies that this is a chunk
-            // }
-            console.log('Chunk', chunkOrAsset.modules);
-        }
+// external.js
+(new Bundler(Path.join(__dirname, './external.js'), {
+    outDir: './plugin/', // 将生成的文件放入输出目录下，默认为 dist
+    outFile: 'external.js', // 输出文件的名称
+    cache: true, // 启用或禁用缓存，默认为 true
+    cacheDir: '.cache', // 存放缓存的目录，默认为 .cache
+    contentHash: false, // 禁止文件名hash
+    global: 'moduleName', // 在当前名字模块以UMD模式导出，默认禁止。
+    minify: true, // 压缩文件，当 process.env.NODE_ENV === 'production' 时，会启用
+    target: 'node', // browser/node/electron, 默认为 browser
+    bundleNodeModules: true, // 当package.json的'target'设置'node' or 'electron'时，相应的依赖不会加入bundle中。设置true将被包含。
+    sourceMaps: false,
+    logLevel: 3,
+    watch: false,
+    detailedReport: false // 打印 bundles、资源、文件大小和使用时间的详细报告，默认为 false，只有在禁用监听状态时才打印报告
+})).bundle().then(
+    // app.js
+    () => {
+        (new Bundler(Path.join(__dirname, './src/app.js'), {
+            outDir: './plugin/', // 将生成的文件放入输出目录下，默认为 dist
+            outFile: 'app.js', // 输出文件的名称
+            publicUrl: '/', // 静态资源的 url ，默认为 '/'
+            watch: false, // 是否需要监听文件并在发生改变时重新编译它们，默认为 process.env.NODE_ENV !== 'production'
+            cache: true, // 启用或禁用缓存，默认为 true
+            cacheDir: '.cache', // 存放缓存的目录，默认为 .cache
+            contentHash: false, // 禁止文件名hash
+            global: 'moduleName', // 在当前名字模块以UMD模式导出，默认禁止。
+            minify: true, // 压缩文件，当 process.env.NODE_ENV === 'production' 时，会启用
+            scopeHoist: false, // 打开实验性的scope hoisting/tree shaking用来缩小生产环境的包。
+            target: 'browser', // browser/node/electron, 默认为 browser
+            bundleNodeModules: true, // 当package.json的'target'设置'node' or 'electron'时，相应的依赖不会加入bundle中。设置true将被包含。
+            sourceMaps: false,
+            logLevel: 3,
+            detailedReport: false // 打印 bundles、资源、文件大小和使用时间的详细报告，默认为 false，只有在禁用监听状态时才打印报告
+        })).bundle();
     }
-
-    // or write the bundle to disk
-    await bundle.write(outputOptions);
-}
-
-build();
+);
