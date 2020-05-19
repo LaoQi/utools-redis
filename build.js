@@ -15,6 +15,7 @@ const Path = require('path');
     sourceMaps: false,
     logLevel: 3,
     watch: false,
+    hmr: false,
     detailedReport: false // 打印 bundles、资源、文件大小和使用时间的详细报告，默认为 false，只有在禁用监听状态时才打印报告
 })).bundle().then(
     // app.js
@@ -34,6 +35,7 @@ const Path = require('path');
             bundleNodeModules: true, // 当package.json的'target'设置'node' or 'electron'时，相应的依赖不会加入bundle中。设置true将被包含。
             sourceMaps: false,
             logLevel: 3,
+            hmr: false,
             detailedReport: false // 打印 bundles、资源、文件大小和使用时间的详细报告，默认为 false，只有在禁用监听状态时才打印报告
         })).bundle();
     }

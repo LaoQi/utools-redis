@@ -1,5 +1,5 @@
 <template>
-    <h1>{{ message }}</h1>
+    <router-view></router-view>
 </template>
 
 <script>
@@ -7,7 +7,7 @@
 export default {
     data() {
         return {
-            message: "hello vue"
+            message: "hello serve"
         };
     }
 };
