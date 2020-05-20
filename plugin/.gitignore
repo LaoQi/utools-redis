@@ -1,0 +1,7 @@
+*.*
+!.gitignore
+!index.html
+!plugin.json
+!preload.js
+!README.md
+!redis-logo.png

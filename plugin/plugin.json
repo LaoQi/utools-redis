@@ -21,10 +21,10 @@
 			]
 		},
 		{
-			"code": "redis-create-link",
+			"code": "redis-create-connection",
 			"explain": "创建一个新的Redis连接",
 			"cmds": [
-				"redis-create-link"
+				"redis-create-connection"
 			]
 		}
 	]

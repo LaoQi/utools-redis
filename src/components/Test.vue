@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div class="container">
         <h1>{{ path }}</h1>
     </div>
 </template>
