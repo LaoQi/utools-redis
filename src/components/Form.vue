@@ -52,7 +52,7 @@
                 <button class="button is-link" @click="save">{{ $locales.create_form_confirm_button }}</button>
             </div>
             <div class="control">
-                <button class="button is-link is-light">{{ $locales.create_form_test_connection_button }}</button>
+                <button class="button is-link is-light" @click="test">{{ $locales.create_form_test_connection_button }}</button>
             </div>
         </div>
     </div>
@@ -61,6 +61,7 @@
 <script>
 import { utools, DEFAULT_HEIGHT } from "../utils";
 import storage from '../storage';
+import red from '../red';
 
 export default {
     data() {
@@ -74,14 +75,22 @@ export default {
         };
     },
     methods: {
+        getParams() {
+            return JSON.parse(JSON.stringify(this.params))
+        },
         // @todo
         verify() {
             if (!this.params.name) {
                 
             }
         },
+        test() {
+            red.testRedisConnection(this.getParams(), (reply) => {
+                console.log(reply);
+            });
+        },
         save() {
-            storage.putConnection(JSON.parse(JSON.stringify(this.params)));
+            storage.putConnection(this.getParams());
             this.$router.push('/redis').catch(err => {err});
         }
     },

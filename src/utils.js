@@ -65,8 +65,18 @@ if (_is_browser) {
     window.utools = utools;
 }
 
+const _redisClient = {
+    auth(password, callback) {
+        callback && callback();
+    }
+};
+
 export const redis = _is_browser ? {
     _mock: true,
+    createClient(options) {
+        console.log('redis create client', options)
+        return _redisClient;
+    }
 } : window.redis;
 
 
